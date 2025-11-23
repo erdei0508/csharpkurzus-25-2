@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
- using System.Linq;
+using LibraryApp.Core;
 using LibraryApp.Interfaces;
 using LibraryApp.Models;
 
 namespace LibraryApp.Commands;
 
+[Command(Symbol = "search")]
 public class SearchCommand : ICommand
 {
     private readonly List<Book> _books;
@@ -51,7 +50,7 @@ public class SearchCommand : ICommand
         {
             "title" => _books.Where(b => b.Title.ToLower().Contains(q)),
             "author" => _books.Where(b => b.Author.ToLower().Contains(q)),
-            "year" => _books.Where(b => b.Year.ToString().Contains(q)),
+            "year" => _books.Where(b => b.Year.ToString().Equals(q)),
             "genre" => _books.Where(b => b.Genre.ToLower().Contains(q)),
             _ => Enumerable.Empty<Book>()
         };

@@ -1,32 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using LibraryApp.Core;
 using LibraryApp.Interfaces;
 
-namespace LibraryApp.Commands
+namespace LibraryApp.Commands;
+
+[Command(Symbol = "help")]
+public class HelpCommand : ICommand
 {
-    public class HelpCommand : ICommand
+    private readonly IEnumerable<ICommand> _commands;
+
+    public HelpCommand(IEnumerable<ICommand> commands)
     {
-        private readonly IEnumerable<ICommand> _commands;
+        _commands = commands;
+    }
 
-        public HelpCommand(IEnumerable<ICommand> commands)
+    public string Name => "help";
+    public string Description => "Elérhető parancsok listázása és leírása.";
+
+    public void Execute()
+    {
+        Console.WriteLine("\nElérhető parancsok:\n");
+
+        foreach (var cmd in _commands.OrderBy(c => c.Name))
         {
-            _commands = commands;
+            Console.WriteLine($"{cmd.Name.PadRight(10)} - {cmd.Description}");
         }
 
-        public string Name => "help";
-        public string Description => "Elérhető parancsok listázása és leírása.";
-
-        public void Execute()
-        {
-            Console.WriteLine("\nElérhető parancsok:\n");
-
-            foreach (var cmd in _commands.OrderBy(c => c.Name))
-            {
-                Console.WriteLine($"{cmd.Name.PadRight(10)} - {cmd.Description}");
-            }
-
-            Console.WriteLine("\nHasználat: írd be a parancs nevét, majd ENTER.");
-        }
+        Console.WriteLine("\nHasználat: írd be a parancs nevét, majd ENTER.");
     }
 }

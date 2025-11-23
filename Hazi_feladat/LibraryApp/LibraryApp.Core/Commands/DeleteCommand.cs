@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using LibraryApp.Core;
 using LibraryApp.Interfaces;
 using LibraryApp.Models;
 
 namespace LibraryApp.Commands;
 
+//Az id-k nem frissülnek, meg kell még csinálni
+[Command(Symbol = "delete")]
 public class DeleteCommand : ICommand
 {
     private readonly List<Book> _books;

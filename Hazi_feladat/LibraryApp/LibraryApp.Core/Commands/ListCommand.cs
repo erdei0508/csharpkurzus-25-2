@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
+using LibraryApp.Core;
 using LibraryApp.Interfaces;
 using LibraryApp.Models;
 
 namespace LibraryApp.Commands;
 
+[Command(Symbol = "list")]
 public class ListCommand : ICommand
 {
     private readonly List<Book> _books;
+    private readonly ILoggerService _logger;
 
-    public ListCommand(List<Book> books)
+    public ListCommand(List<Book> books, ILoggerService logger)
     {
         _books = books;
+        _logger = logger;
     }
 
     public string Name => "list";
@@ -21,7 +23,8 @@ public class ListCommand : ICommand
     {
         if (_books.Count == 0)
         {
-            Console.WriteLine("Nincs könyv.");
+            //Console.WriteLine("Nincs könyv.");
+            _logger.Error("Nincs könyv.");
             return;
         }
 

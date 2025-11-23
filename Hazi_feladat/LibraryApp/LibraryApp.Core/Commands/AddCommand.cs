@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using LibraryApp.Core;
 using LibraryApp.Interfaces;
 using LibraryApp.Models;
 
 namespace LibraryApp.Commands;
 
+[Command(Symbol = "add")]
 public class AddCommand : ICommand
 {
     private readonly List<Book> _books;
@@ -25,12 +24,12 @@ public class AddCommand : ICommand
         try
         {
             Console.Write("Cím: ");
-            string title = Console.ReadLine();
+            string? title = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(title))
                 title = "Ismeretlen cím";
 
             Console.Write("Szerző: ");
-            string author = Console.ReadLine();
+            string? author = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(author))
                 author = "Ismeretlen szerző";
 
@@ -39,7 +38,7 @@ public class AddCommand : ICommand
             int year = int.TryParse(Console.ReadLine(), out int y) ? y : 0;
 
             Console.Write("Műfaj: ");
-            string genre = Console.ReadLine();
+            string? genre = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(genre))
                 genre = "Ismeretlen műfaj";
 
