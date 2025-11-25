@@ -42,7 +42,7 @@ public class Program
                 {
                     var instance = (ICommand)Activator.CreateInstance(type, books, logger)!;
                     commands.Add(instance);
-                    logger.Info($"DEBUG: {type.Name} betöltve.");
+                    //logger.Info($"DEBUG: {type.Name} betöltve.");
                 }
                 catch (Exception ex)
                 {

@@ -24,7 +24,7 @@ public class ListCommand : ICommand
         if (_books.Count == 0)
         {
             //Console.WriteLine("Nincs könyv.");
-            _logger.Error("Nincs könyv.");
+            _logger.Error("A könyvtárad üres.");
             return;
         }
 
